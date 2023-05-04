@@ -13,6 +13,10 @@ buildscript {
         glide_version = '4.15.1'
         lottie_version = '6.0.0'
         shimmer_version = '0.5.0'
+        palette_version = '1.0.0'
+    }
+    dependencies {
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
     }
 }
 plugins {
