@@ -1,0 +1,15 @@
+dependencies {
+    // kotlin flow
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_flow_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_flow_version"
+
+    // hilt dagger
+    implementation "com.google.dagger:hilt-android:$hilt_dagger_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_dagger_version"
+
+    // pagination
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    // timber logging
+    implementation "com.jakewharton.timber:timber:$timber_version"
+}

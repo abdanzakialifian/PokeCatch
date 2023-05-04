@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 apply from: '../shared_dependencies.gradle'
@@ -36,11 +38,30 @@ android {
 
 dependencies {
     implementation project(":core")
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // view model
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
+
+    // fragment
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    // navigation fragment
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    // glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+
+    // lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
+    // shimmer facebook
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 }

@@ -1,6 +1,23 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlin_flow_version = '1.6.4'
+        hilt_dagger_version = '2.45'
+        retrofit_version = '2.9.0'
+        okhttp_version = '5.0.0-alpha.11'
+        paging_version = '3.1.1'
+        timber_version = '5.0.1'
+        viewmodel_version = '2.6.1'
+        fragment_version = '1.5.7'
+        navigation_version = '2.5.3'
+        glide_version = '4.15.1'
+        lottie_version = '6.0.0'
+        shimmer_version = '0.5.0'
+    }
+}
 plugins {
     id 'com.android.application' version '8.0.1' apply false
     id 'com.android.library' version '8.0.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.20' apply false
+    id 'com.google.dagger.hilt.android' version '2.45' apply false
 }
