@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">PokeCatch</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="name_or_number">Name or number</string>
+    <string name="sub_title">Search for a Pokemon by name or using its National PokeCatch number.</string>
 </resources>
