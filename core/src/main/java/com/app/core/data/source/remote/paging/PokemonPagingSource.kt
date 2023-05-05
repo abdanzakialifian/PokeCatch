@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.app.core.data.source.remote.ApiService
 import com.app.core.data.source.remote.response.PokemonResultsItemResponse
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,8 +21,6 @@ class PokemonPagingSource @Inject constructor(private val apiService: ApiService
 
             val response = apiService.getPokemonList(offset, loadSize)
             val responseBody = response.body()?.results
-
-            Timber.tag("CEK").d(querySearch)
 
             val filterList = if (querySearch != "") responseBody?.filter { data ->
                 data.name?.contains(

@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.app.pokecatch.presentation.home.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.app.pokecatch.presentation.splash.SplashScreenFragment"
@@ -21,5 +25,21 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.app.pokecatch.presentation.detail.view.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="name"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="imageUrl"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

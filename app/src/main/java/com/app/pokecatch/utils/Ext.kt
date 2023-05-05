@@ -1,7 +1,7 @@
 package com.app.pokecatch.utils
 
 import android.view.View
-import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.SearchView
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,12 +11,12 @@ fun String.extractId(): Int = this.substringAfter("pokemon").replace("/", "").to
 
 fun String.getImageUrl(): String {
     val id = this.extractId()
-    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png"
+    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
 }
 
-fun ImageView.setImageUrl(pictUrl: String) {
-    Glide.with(context)
-        .load(pictUrl)
+fun AppCompatImageView.loadImageUrl(imageUrl: String) {
+    Glide.with(this)
+        .load(imageUrl)
         .into(this)
 }
 

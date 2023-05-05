@@ -29,8 +29,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_pokemon"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
                 tools:src="@tools:sample/avatars" />
 
         </FrameLayout>
