@@ -1,6 +1,6 @@
 package com.app.core.utils
 
-import com.app.core.data.source.remote.paging.DetailPokemonResponse
+import com.app.core.data.source.remote.response.DetailPokemonResponse
 import com.app.core.data.source.remote.response.PokemonResultsItemResponse
 import com.app.core.domain.model.AbilitiesItem
 import com.app.core.domain.model.Ability
@@ -287,3 +287,4 @@ fun DetailPokemonResponse.mapToDetailPokemon(): DetailPokemon = DetailPokemon(
     height = this.height,
     order = this.order
 )
+

@@ -5,32 +5,24 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.transition.TransitionInflater
 import androidx.annotation.StringRes
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
-import com.app.core.utils.UiState
 import com.app.pokecatch.R
 import com.app.pokecatch.databinding.FragmentDetailBinding
 import com.app.pokecatch.presentation.about.view.AboutFragment
 import com.app.pokecatch.presentation.base.BaseVBFragment
 import com.app.pokecatch.presentation.detail.adapter.ViewPagerAdapter
-import com.app.pokecatch.presentation.detail.viewmodel.DetailViewModel
-import com.app.pokecatch.presentation.moves.view.MovesFragment
+import com.app.pokecatch.presentation.move.view.MovesFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
 
-    private val viewModel by viewModels<DetailViewModel>()
     private val navArgs by navArgs<DetailFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,23 +55,6 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
         }
     }
 
-    private fun getPokemon() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getPokemon(navArgs.name ?: "")
-                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-                .collect { uiState ->
-                    when (uiState) {
-                        is UiState.Loading -> {}
-                        is UiState.Success -> {
-
-                        }
-
-                        is UiState.Error -> {}
-                    }
-                }
-        }
-    }
-
     private fun setBackgroundCardView(imageUrl: String) {
         Glide.with(requireContext())
             .asBitmap()
@@ -109,7 +84,7 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
         val tabLayout = binding?.tabLayout
         val viewPagerAdapter = ViewPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
         viewPagerAdapter.addFragment(AboutFragment())
-        viewPagerAdapter.addFragment(MovesFragment())
+        viewPagerAdapter.addFragment(MovesFragment.newInstance(navArgs.name ?: ""))
         viewPager?.adapter = viewPagerAdapter
         if (tabLayout != null && viewPager != null) {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->

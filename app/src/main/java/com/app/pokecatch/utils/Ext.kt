@@ -1,23 +1,17 @@
 package com.app.pokecatch.utils
 
+import android.os.SystemClock
 import android.view.View
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.SearchView
-import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.util.Locale
 
 fun String.extractId(): Int = this.substringAfter("pokemon").replace("/", "").toInt()
 
 fun String.getImageUrl(): String {
     val id = this.extractId()
     return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
-}
-
-fun AppCompatImageView.loadImageUrl(imageUrl: String) {
-    Glide.with(this)
-        .load(imageUrl)
-        .into(this)
 }
 
 fun View.visible() {
@@ -41,4 +35,23 @@ fun SearchView.getQueryTextChangeStateFlow(): StateFlow<String> {
         }
     })
     return searchQuery
+}
+
+fun String.capitalizeWords(): String = split(" ").joinToString(" ") {
+    it.replaceFirstChar { char ->
+        if (char.isLowerCase()) char.titlecase(
+            Locale.getDefault()
+        ) else char.toString()
+    }
+}
+
+fun View.setOnSingleClickListener(onClick: () -> Unit) {
+    var mLastClickTime = 0L
+    this.setOnClickListener {
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+            return@setOnClickListener
+        }
+        mLastClickTime = SystemClock.elapsedRealtime()
+        onClick.invoke()
+    }
 }

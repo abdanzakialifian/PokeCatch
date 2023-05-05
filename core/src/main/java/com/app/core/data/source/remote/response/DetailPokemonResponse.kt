@@ -1,61 +1,61 @@
-package com.app.core.data.source.remote.paging
+package com.app.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
 data class DetailPokemonResponse(
 
-	@field:SerializedName("location_area_encounters")
+    @field:SerializedName("location_area_encounters")
 	val locationAreaEncounters: String? = null,
 
-	@field:SerializedName("types")
+    @field:SerializedName("types")
 	val types: List<TypesItemResponse>? = null,
 
-	@field:SerializedName("base_experience")
+    @field:SerializedName("base_experience")
 	val baseExperience: Int? = null,
 
-	@field:SerializedName("held_items")
+    @field:SerializedName("held_items")
 	val heldItems: List<HeldItemsItemResponse>? = null,
 
-	@field:SerializedName("weight")
+    @field:SerializedName("weight")
 	val weight: Int? = null,
 
-	@field:SerializedName("is_default")
+    @field:SerializedName("is_default")
 	val isDefault: Boolean? = null,
 
-	@field:SerializedName("past_types")
+    @field:SerializedName("past_types")
 	val pastTypes: List<Any>? = null,
 
-	@field:SerializedName("sprites")
+    @field:SerializedName("sprites")
 	val sprites: SpritesResponse? = null,
 
-	@field:SerializedName("abilities")
+    @field:SerializedName("abilities")
 	val abilities: List<AbilitiesItemResponse>? = null,
 
-	@field:SerializedName("game_indices")
+    @field:SerializedName("game_indices")
 	val gameIndices: List<GameIndicesItemResponse>? = null,
 
-	@field:SerializedName("species")
+    @field:SerializedName("species")
 	val species: SpeciesResponse? = null,
 
-	@field:SerializedName("stats")
+    @field:SerializedName("stats")
 	val stats: List<StatsItemResponse>? = null,
 
-	@field:SerializedName("moves")
+    @field:SerializedName("moves")
 	val moves: List<MovesItemResponse>? = null,
 
-	@field:SerializedName("name")
+    @field:SerializedName("name")
 	val name: String? = null,
 
-	@field:SerializedName("id")
+    @field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("forms")
+    @field:SerializedName("forms")
 	val forms: List<FormsItemResponse>? = null,
 
-	@field:SerializedName("height")
+    @field:SerializedName("height")
 	val height: Int? = null,
 
-	@field:SerializedName("order")
+    @field:SerializedName("order")
 	val order: Int? = null
 )
 
@@ -70,52 +70,52 @@ data class VersionGroupResponse(
 
 data class BlackWhiteResponse(
 
-	@field:SerializedName("back_shiny_female")
+    @field:SerializedName("back_shiny_female")
 	val backShinyFemale: String? = null,
 
-	@field:SerializedName("back_female")
+    @field:SerializedName("back_female")
 	val backFemale: String? = null,
 
-	@field:SerializedName("back_default")
+    @field:SerializedName("back_default")
 	val backDefault: String? = null,
 
-	@field:SerializedName("front_shiny_female")
+    @field:SerializedName("front_shiny_female")
 	val frontShinyFemale: String? = null,
 
-	@field:SerializedName("front_default")
+    @field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
-	@field:SerializedName("animated")
+    @field:SerializedName("animated")
 	val animated: AnimatedResponse? = null,
 
-	@field:SerializedName("front_female")
+    @field:SerializedName("front_female")
 	val frontFemale: String? = null,
 
-	@field:SerializedName("back_shiny")
+    @field:SerializedName("back_shiny")
 	val backShiny: String? = null,
 
-	@field:SerializedName("front_shiny")
+    @field:SerializedName("front_shiny")
 	val frontShiny: String? = null
 )
 
 data class MovesItemResponse(
 
-	@field:SerializedName("version_group_details")
+    @field:SerializedName("version_group_details")
 	val versionGroupDetails: List<VersionGroupDetailsItemResponse>? = null,
 
-	@field:SerializedName("move")
+    @field:SerializedName("move")
 	val move: MoveResponse? = null
 )
 
 data class OtherResponse(
 
-	@field:SerializedName("dream_world")
+    @field:SerializedName("dream_world")
 	val dreamWorld: DreamWorldResponse? = null,
 
-	@field:SerializedName("official-artwork")
+    @field:SerializedName("official-artwork")
 	val officialArtwork: OfficialArtworkResponse? = null,
 
-	@field:SerializedName("home")
+    @field:SerializedName("home")
 	val home: HomeResponse? = null
 )
 
@@ -184,46 +184,46 @@ data class DreamWorldResponse(
 
 data class VersionGroupDetailsItemResponse(
 
-	@field:SerializedName("level_learned_at")
+    @field:SerializedName("level_learned_at")
 	val levelLearnedAt: Int? = null,
 
-	@field:SerializedName("version_group")
+    @field:SerializedName("version_group")
 	val versionGroup: VersionGroupResponse? = null,
 
-	@field:SerializedName("move_learn_method")
+    @field:SerializedName("move_learn_method")
 	val moveLearnMethod: MoveLearnMethodResponse? = null
 )
 
 data class SpritesResponse(
 
-	@field:SerializedName("back_shiny_female")
+    @field:SerializedName("back_shiny_female")
 	val backShinyFemale: String? = null,
 
-	@field:SerializedName("back_female")
+    @field:SerializedName("back_female")
 	val backFemale: String? = null,
 
-	@field:SerializedName("other")
+    @field:SerializedName("other")
 	val other: OtherResponse? = null,
 
-	@field:SerializedName("back_default")
+    @field:SerializedName("back_default")
 	val backDefault: String? = null,
 
-	@field:SerializedName("front_shiny_female")
+    @field:SerializedName("front_shiny_female")
 	val frontShinyFemale: String? = null,
 
-	@field:SerializedName("front_default")
+    @field:SerializedName("front_default")
 	val frontDefault: String? = null,
 
-	@field:SerializedName("versions")
+    @field:SerializedName("versions")
 	val versions: VersionsResponse? = null,
 
-	@field:SerializedName("front_female")
+    @field:SerializedName("front_female")
 	val frontFemale: String? = null,
 
-	@field:SerializedName("back_shiny")
+    @field:SerializedName("back_shiny")
 	val backShiny: String? = null,
 
-	@field:SerializedName("front_shiny")
+    @field:SerializedName("front_shiny")
 	val frontShiny: String? = null
 )
 
@@ -247,10 +247,10 @@ data class VersionResponse(
 
 data class GenerationViResponse(
 
-	@field:SerializedName("omegaruby-alphasapphire")
+    @field:SerializedName("omegaruby-alphasapphire")
 	val omegarubyAlphasapphire: OmegarubyAlphasapphireResponse? = null,
 
-	@field:SerializedName("x-y")
+    @field:SerializedName("x-y")
 	val xY: XYResponse? = null
 )
 
@@ -301,13 +301,13 @@ data class StatResponse(
 
 data class StatsItemResponse(
 
-	@field:SerializedName("stat")
+    @field:SerializedName("stat")
 	val stat: StatResponse? = null,
 
-	@field:SerializedName("base_stat")
+    @field:SerializedName("base_stat")
 	val baseStat: Int? = null,
 
-	@field:SerializedName("effort")
+    @field:SerializedName("effort")
 	val effort: Int? = null
 )
 
@@ -331,13 +331,13 @@ data class GoldResponse(
 
 data class GenerationIvResponse(
 
-	@field:SerializedName("platinum")
+    @field:SerializedName("platinum")
 	val platinum: PlatinumResponse? = null,
 
-	@field:SerializedName("diamond-pearl")
+    @field:SerializedName("diamond-pearl")
 	val diamondPearl: DiamondPearlResponse? = null,
 
-	@field:SerializedName("heartgold-soulsilver")
+    @field:SerializedName("heartgold-soulsilver")
 	val heartgoldSoulsilver: HeartgoldSoulsilverResponse? = null
 )
 
@@ -388,22 +388,22 @@ data class MoveLearnMethodResponse(
 
 data class VersionDetailsItemResponse(
 
-	@field:SerializedName("version")
+    @field:SerializedName("version")
 	val version: VersionResponse? = null,
 
-	@field:SerializedName("rarity")
+    @field:SerializedName("rarity")
 	val rarity: Int? = null
 )
 
 data class AbilitiesItemResponse(
 
-	@field:SerializedName("is_hidden")
+    @field:SerializedName("is_hidden")
 	val isHidden: Boolean? = null,
 
-	@field:SerializedName("ability")
+    @field:SerializedName("ability")
 	val ability: AbilityResponse? = null,
 
-	@field:SerializedName("slot")
+    @field:SerializedName("slot")
 	val slot: Int? = null
 )
 
@@ -436,13 +436,13 @@ data class PlatinumResponse(
 
 data class GenerationIiResponse(
 
-	@field:SerializedName("gold")
+    @field:SerializedName("gold")
 	val gold: GoldResponse? = null,
 
-	@field:SerializedName("crystal")
+    @field:SerializedName("crystal")
 	val crystal: CrystalResponse? = null,
 
-	@field:SerializedName("silver")
+    @field:SerializedName("silver")
 	val silver: SilverResponse? = null
 )
 
@@ -475,10 +475,10 @@ data class CrystalResponse(
 
 data class HeldItemsItemResponse(
 
-	@field:SerializedName("item")
+    @field:SerializedName("item")
 	val item: ItemResponse? = null,
 
-	@field:SerializedName("version_details")
+    @field:SerializedName("version_details")
 	val versionDetails: List<VersionDetailsItemResponse>? = null
 )
 
@@ -493,10 +493,10 @@ data class AbilityResponse(
 
 data class GenerationIResponse(
 
-	@field:SerializedName("yellow")
+    @field:SerializedName("yellow")
 	val yellow: YellowResponse? = null,
 
-	@field:SerializedName("red-blue")
+    @field:SerializedName("red-blue")
 	val redBlue: RedBlueResponse? = null
 )
 
@@ -559,10 +559,10 @@ data class HeartgoldSoulsilverResponse(
 
 data class GenerationViiResponse(
 
-	@field:SerializedName("icons")
+    @field:SerializedName("icons")
 	val icons: IconsResponse? = null,
 
-	@field:SerializedName("ultra-sun-ultra-moon")
+    @field:SerializedName("ultra-sun-ultra-moon")
 	val ultraSunUltraMoon: UltraSunUltraMoonResponse? = null
 )
 
@@ -577,13 +577,13 @@ data class MoveResponse(
 
 data class GenerationIiiResponse(
 
-	@field:SerializedName("firered-leafgreen")
+    @field:SerializedName("firered-leafgreen")
 	val fireredLeafgreen: FireredLeafgreenResponse? = null,
 
-	@field:SerializedName("ruby-sapphire")
+    @field:SerializedName("ruby-sapphire")
 	val rubySapphire: RubySapphireResponse? = null,
 
-	@field:SerializedName("emerald")
+    @field:SerializedName("emerald")
 	val emerald: EmeraldResponse? = null
 )
 
@@ -616,28 +616,28 @@ data class SilverResponse(
 
 data class VersionsResponse(
 
-	@field:SerializedName("generation-iii")
+    @field:SerializedName("generation-iii")
 	val generationIii: GenerationIiiResponse? = null,
 
-	@field:SerializedName("generation-ii")
+    @field:SerializedName("generation-ii")
 	val generationIi: GenerationIiResponse? = null,
 
-	@field:SerializedName("generation-v")
+    @field:SerializedName("generation-v")
 	val generationV: GenerationVResponse? = null,
 
-	@field:SerializedName("generation-iv")
+    @field:SerializedName("generation-iv")
 	val generationIv: GenerationIvResponse? = null,
 
-	@field:SerializedName("generation-vii")
+    @field:SerializedName("generation-vii")
 	val generationVii: GenerationViiResponse? = null,
 
-	@field:SerializedName("generation-i")
+    @field:SerializedName("generation-i")
 	val generationI: GenerationIResponse? = null,
 
-	@field:SerializedName("generation-viii")
+    @field:SerializedName("generation-viii")
 	val generationViii: GenerationViiiResponse? = null,
 
-	@field:SerializedName("generation-vi")
+    @field:SerializedName("generation-vi")
 	val generationVi: GenerationViResponse? = null
 )
 

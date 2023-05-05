@@ -1,11 +1,10 @@
 package com.app.core.data.source.remote
 
-import androidx.core.text.isDigitsOnly
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.app.core.data.source.remote.paging.DetailPokemonResponse
 import com.app.core.data.source.remote.paging.PokemonPagingSource
+import com.app.core.data.source.remote.response.DetailPokemonResponse
 import com.app.core.data.source.remote.response.PokemonResultsItemResponse
 import com.app.core.utils.UiState
 import kotlinx.coroutines.Dispatchers

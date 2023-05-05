@@ -48,6 +48,8 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
     }
 
     private fun getPokemonList() {
+        setAdapterItemClick()
+
         val footerAdapter = LoadingStateAdapter {
             adapter.retry()
         }
@@ -61,28 +63,9 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
         }
 
         binding?.apply {
-            rvPokemon.adapter = adapter.apply {
-                withLoadStateFooter(footer = footerAdapter)
-                setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
-                    override fun onItemClicked(
-                        name: String,
-                        imageUrl: String,
-                        imageView: AppCompatImageView,
-                        textView: TextView
-                    ) {
-                        val extras = FragmentNavigatorExtras(
-                            imageView to imageUrl,
-                            textView to name
-                        )
-                        val navigateToDetailFragment =
-                            HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                                name = name,
-                                imageUrl = imageUrl
-                            )
-                        findNavController().navigate(navigateToDetailFragment,extras)
-                    }
-                })
-            }
+            rvPokemon.adapter = adapter.withLoadStateFooter(
+                footer = footerAdapter
+            )
             rvPokemon.layoutManager = gridLayoutManager
         }
 
@@ -114,6 +97,28 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
                 }
             }
         }
+    }
+
+    private fun setAdapterItemClick() {
+        adapter.setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+            override fun onItemClicked(
+                name: String,
+                imageUrl: String,
+                imageView: AppCompatImageView,
+                textView: TextView
+            ) {
+                val extras = FragmentNavigatorExtras(
+                    imageView to imageUrl,
+                    textView to name
+                )
+                val navigateToDetailFragment =
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                        name = name,
+                        imageUrl = imageUrl
+                    )
+                findNavController().navigate(navigateToDetailFragment, extras)
+            }
+        })
     }
 
     override fun onDestroyView() {

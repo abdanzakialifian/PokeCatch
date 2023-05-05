@@ -24,8 +24,7 @@ class PokemonPagingSource @Inject constructor(private val apiService: ApiService
 
             val filterList = if (querySearch != "") responseBody?.filter { data ->
                 data.name?.contains(
-                    querySearch,
-                    true
+                    querySearch, true
                 ) ?: false
             } else responseBody
 
