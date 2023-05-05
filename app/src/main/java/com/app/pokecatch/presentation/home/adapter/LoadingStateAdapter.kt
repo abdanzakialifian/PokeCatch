@@ -20,7 +20,6 @@ class LoadingStateAdapter(private val retry: () -> Unit) :
                     progressBar.isVisible = loadState is LoadState.Loading
                     btnRetry.isVisible = loadState is LoadState.Error
                 }
-
             }
     }
 

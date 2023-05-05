@@ -1,6 +1,5 @@
 package com.app.pokecatch.presentation.home.view
 
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -29,6 +28,10 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
 
     override fun initView() {
         getPokemonList()
+        setSearchView()
+    }
+
+    private fun setSearchView() {
         viewLifecycleOwner.lifecycleScope.launch {
             binding?.searchView?.let {
                 viewModel.searchFlow(it)
@@ -51,7 +54,6 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
             override fun getSpanSize(position: Int): Int {
                 return if (position == adapter.itemCount && footerAdapter.itemCount > 0) 2 else 1
             }
-
         }
 
         binding?.apply {
