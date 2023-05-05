@@ -1,9 +1,13 @@
 package com.app.pokecatch.presentation.home.view
 
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.pokecatch.databinding.FragmentHomeBinding
@@ -36,7 +40,7 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
             binding?.searchView?.let {
                 viewModel.searchFlow(it)
                     .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
-                    .collect {query ->
+                    .collect { query ->
                         viewModel.setQuery(query)
                     }
             }
@@ -57,16 +61,34 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
         }
 
         binding?.apply {
-            rvPokemon.adapter = adapter.withLoadStateFooter(
-                footer = footerAdapter
-            )
+            rvPokemon.adapter = adapter.apply {
+                withLoadStateFooter(footer = footerAdapter)
+                setOnItemClickCallback(object : HomeAdapter.OnItemClickCallback {
+                    override fun onItemClicked(
+                        name: String,
+                        imageUrl: String,
+                        imageView: AppCompatImageView,
+                        textView: TextView
+                    ) {
+                        val extras = FragmentNavigatorExtras(
+                            imageView to imageUrl,
+                            textView to name
+                        )
+                        val navigateToDetailFragment =
+                            HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                                name = name,
+                                imageUrl = imageUrl
+                            )
+                        findNavController().navigate(navigateToDetailFragment,extras)
+                    }
+                })
+            }
             rvPokemon.layoutManager = gridLayoutManager
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.getPokemonList.flowWithLifecycle(
-                viewLifecycleOwner.lifecycle,
-                Lifecycle.State.STARTED
+                viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED
             ).collect { pagingData ->
                 adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
                 adapter.addLoadStateListener { loadState ->
