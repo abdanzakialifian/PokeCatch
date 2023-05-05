@@ -1,6 +1,7 @@
 package com.app.pokecatch.presentation.home.adapter
 
 import android.graphics.Bitmap
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +10,6 @@ import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.core.domain.model.PokemonResultsItem
-import com.app.pokecatch.R
 import com.app.pokecatch.databinding.ItemListPokemonBinding
 import com.app.pokecatch.utils.getImageUrl
 import com.bumptech.glide.Glide
@@ -38,8 +38,11 @@ class HomeAdapter @Inject constructor() :
                     ) {
                         Palette.from(resource).generate { palette ->
                             if (palette?.lightVibrantSwatch != null) {
-                                binding.cvPokemon.setCardBackgroundColor(palette.lightVibrantSwatch?.rgb ?: 0)
-                                binding.tvPokemonName.setTextColor(palette.lightVibrantSwatch?.titleTextColor ?: 0)
+                                binding.apply {
+                                    cvPokemon.setCardBackgroundColor(palette.lightVibrantSwatch?.rgb ?: 0)
+                                    tvPokemonName.setTextColor(palette.lightVibrantSwatch?.titleTextColor ?: 0)
+                                    imgPokeball.setColorFilter(palette.lightVibrantSwatch?.bodyTextColor ?: 0, PorterDuff.Mode.MULTIPLY)
+                                }
                             }
                         }
                     }

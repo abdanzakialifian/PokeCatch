@@ -5,5 +5,5 @@ import com.app.core.domain.model.PokemonResultsItem
 import kotlinx.coroutines.flow.Flow
 
 interface PokemonUseCase {
-    fun getPokemonList(): Flow<PagingData<PokemonResultsItem>>
+    fun getPokemonList(query: String): Flow<PagingData<PokemonResultsItem>>
 }

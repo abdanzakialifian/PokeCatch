@@ -11,6 +11,6 @@ import javax.inject.Singleton
 @Singleton
 class PokemonInteractorImpl @Inject constructor(private val pokemonRepository: PokemonRepository) :
     PokemonUseCase {
-    override fun getPokemonList(): Flow<PagingData<PokemonResultsItem>> =
-        pokemonRepository.getPokemonList()
+    override fun getPokemonList(query: String): Flow<PagingData<PokemonResultsItem>> =
+        pokemonRepository.getPokemonList(query)
 }

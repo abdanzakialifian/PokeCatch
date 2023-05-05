@@ -14,8 +14,8 @@ import javax.inject.Singleton
 @Singleton
 class PokemonRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) :
     PokemonRepository {
-    override fun getPokemonList(): Flow<PagingData<PokemonResultsItem>> =
-        remoteDataSource.getPokemonList().map { pagingData ->
+    override fun getPokemonList(query: String): Flow<PagingData<PokemonResultsItem>> =
+        remoteDataSource.getPokemonList(query).map { pagingData ->
             pagingData.map { map ->
                 map.mapToPokemonResultsItem()
             }
