@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.app.core.domain.interfaces.PokemonRepository
 import com.app.core.domain.interfaces.PokemonUseCase
 import com.app.core.domain.model.DetailPokemon
+import com.app.core.domain.model.Pokemon
 import com.app.core.domain.model.PokemonResultsItem
 import com.app.core.utils.UiState
 import kotlinx.coroutines.flow.Flow
@@ -18,4 +19,16 @@ class PokemonInteractorImpl @Inject constructor(private val pokemonRepository: P
 
     override fun getPokemon(name: String): Flow<UiState<DetailPokemon>> =
         pokemonRepository.getPokemon(name)
+
+    override fun insertPokemon(pokemon: Pokemon) {
+        pokemonRepository.insertPokemon(pokemon)
+    }
+
+    override fun checkPokemon(pokemonId: Int): Boolean = pokemonRepository.checkPokemon(pokemonId)
+
+    override fun deletePokemon(pokemonId: Int) {
+        pokemonRepository.deletePokemon(pokemonId)
+    }
+
+    override fun getAllPokemon(): Flow<List<Pokemon>> = pokemonRepository.getAllPokemon()
 }

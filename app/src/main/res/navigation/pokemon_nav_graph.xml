@@ -47,7 +47,11 @@
     </fragment>
     <fragment
         android:id="@+id/myPokemonFragment"
-        android:name="com.app.pokecatch.presentation.pokecatch.view.MyPokemonFragment"
+        android:name="com.app.pokecatch.presentation.pokecaught.view.MyPokemonFragment"
         android:label="fragment_my_pokemon"
-        tools:layout="@layout/fragment_my_pokemon" />
+        tools:layout="@layout/fragment_my_pokemon">
+        <action
+            android:id="@+id/action_myPokemonFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

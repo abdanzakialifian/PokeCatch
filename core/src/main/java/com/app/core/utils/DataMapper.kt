@@ -1,5 +1,6 @@
 package com.app.core.utils
 
+import com.app.core.data.source.local.entity.PokemonEntity
 import com.app.core.data.source.remote.response.DetailPokemonResponse
 import com.app.core.data.source.remote.response.PokemonResultsItemResponse
 import com.app.core.domain.model.AbilitiesItem
@@ -35,6 +36,7 @@ import com.app.core.domain.model.OfficialArtwork
 import com.app.core.domain.model.OmegarubyAlphasapphire
 import com.app.core.domain.model.Other
 import com.app.core.domain.model.Platinum
+import com.app.core.domain.model.Pokemon
 import com.app.core.domain.model.PokemonResultsItem
 import com.app.core.domain.model.RedBlue
 import com.app.core.domain.model.RubySapphire
@@ -286,5 +288,19 @@ fun DetailPokemonResponse.mapToDetailPokemon(): DetailPokemon = DetailPokemon(
     },
     height = this.height,
     order = this.order
+)
+
+fun Pokemon.mapToPokemonEntity(): PokemonEntity = PokemonEntity(
+    pokemonId = this.pokemonId,
+    pokemonName = this.pokemonName,
+    pokemonImage = this.pokemonImage,
+    pokemonType = this.pokemonType
+)
+
+fun PokemonEntity.mapToPokemon(): Pokemon = Pokemon(
+    pokemonId = this.pokemonId,
+    pokemonName = this.pokemonName,
+    pokemonImage = this.pokemonImage,
+    pokemonType = this.pokemonType
 )
 

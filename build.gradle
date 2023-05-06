@@ -14,9 +14,12 @@ buildscript {
         lottie_version = '6.0.0'
         shimmer_version = '0.5.0'
         palette_version = '1.0.0'
+        room_version = '2.5.1'
+        gson_version = '2.10.1'
     }
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath "com.google.code.gson:gson:$gson_version"
     }
 }
 plugins {
