@@ -1,5 +1,8 @@
 package com.app.core.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class DetailPokemon(
     val locationAreaEncounters: String? = null,
     val types: List<TypesItem>? = null,
@@ -21,10 +24,11 @@ data class DetailPokemon(
     val order: Int? = null
 )
 
+@Parcelize
 data class VersionGroup(
     val name: String? = null,
     val url: String? = null
-)
+): Parcelable
 
 data class BlackWhite(
     val backShinyFemale: String? = null,
@@ -38,10 +42,11 @@ data class BlackWhite(
     val frontShiny: String? = null
 )
 
+@Parcelize
 data class MovesItem(
     val versionGroupDetails: List<VersionGroupDetailsItem>? = null,
     val move: Move? = null
-)
+): Parcelable
 
 data class Other(
     val dreamWorld: DreamWorld? = null,
@@ -80,11 +85,12 @@ data class DreamWorld(
     val frontFemale: Any? = null
 )
 
+@Parcelize
 data class VersionGroupDetailsItem(
     val levelLearnedAt: Int? = null,
     val versionGroup: VersionGroup? = null,
     val moveLearnMethod: MoveLearnMethod? = null
-)
+): Parcelable
 
 data class Sprites(
     val backShinyFemale: String? = null,
@@ -130,16 +136,18 @@ data class Yellow(
     val frontTransparent: String? = null
 )
 
+@Parcelize
 data class Stat(
     val name: String? = null,
     val url: String? = null
-)
+): Parcelable
 
+@Parcelize
 data class StatsItem(
     val stat: Stat? = null,
     val baseStat: Int? = null,
     val effort: Int? = null
-)
+): Parcelable
 
 data class Gold(
     val backDefault: String? = null,
@@ -171,10 +179,11 @@ data class GameIndicesItem(
     val version: Version? = null
 )
 
+@Parcelize
 data class MoveLearnMethod(
     val name: String? = null,
     val url: String? = null
-)
+): Parcelable
 
 data class VersionDetailsItem(
     val version: Version? = null,
@@ -260,10 +269,11 @@ data class GenerationVii(
     val ultraSunUltraMoon: UltraSunUltraMoon? = null
 )
 
+@Parcelize
 data class Move(
     val name: String? = null,
     val url: String? = null
-)
+): Parcelable
 
 data class GenerationIii(
     val fireredLeafgreen: FireredLeafgreen? = null,

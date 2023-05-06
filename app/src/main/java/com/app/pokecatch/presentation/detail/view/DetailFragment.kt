@@ -5,25 +5,41 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.transition.TransitionInflater
 import androidx.annotation.StringRes
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.palette.graphics.Palette
+import com.app.core.domain.model.MovesItem
+import com.app.core.domain.model.StatsItem
+import com.app.core.utils.UiState
 import com.app.pokecatch.R
 import com.app.pokecatch.databinding.FragmentDetailBinding
-import com.app.pokecatch.presentation.about.view.AboutFragment
+import com.app.pokecatch.presentation.stats.view.StatsFragment
 import com.app.pokecatch.presentation.base.BaseVBFragment
+import com.app.pokecatch.presentation.detail.adapter.TypeAdapter
 import com.app.pokecatch.presentation.detail.adapter.ViewPagerAdapter
+import com.app.pokecatch.presentation.detail.viewmodel.DetailViewModel
 import com.app.pokecatch.presentation.move.view.MovesFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
 
+    @Inject
+    lateinit var adapter: TypeAdapter
+    private val viewModel by viewModels<DetailViewModel>()
     private val navArgs by navArgs<DetailFragmentArgs>()
+    private var statsList: List<StatsItem>? = null
+    private var movesList: List<MovesItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +51,8 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
         FragmentDetailBinding.inflate(layoutInflater)
 
     override fun initView() {
-//        getPokemon()
         setViewPager()
+        getPokemon()
         binding?.apply {
             tvPokemonName.apply {
                 transitionName = navArgs.name
@@ -79,12 +95,33 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
             })
     }
 
+    private fun getPokemon() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getPokemon(navArgs.name ?: "")
+                .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+                .collect { uiState ->
+                    when (uiState) {
+                        is UiState.Loading -> {}
+                        is UiState.Success -> {
+                            adapter.submitList(uiState.data.types)
+                            binding?.rvType?.adapter = adapter
+                            statsList = uiState.data.stats
+                            movesList = uiState.data.moves
+                            setViewPager()
+                        }
+
+                        is UiState.Error -> {}
+                    }
+                }
+        }
+    }
+
     private fun setViewPager() {
         val viewPager = binding?.viewPager
         val tabLayout = binding?.tabLayout
         val viewPagerAdapter = ViewPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
-        viewPagerAdapter.addFragment(AboutFragment())
-        viewPagerAdapter.addFragment(MovesFragment.newInstance(navArgs.name ?: ""))
+        viewPagerAdapter.addFragment(StatsFragment.newInstance(ArrayList(statsList ?: emptyList())))
+        viewPagerAdapter.addFragment(MovesFragment.newInstance(ArrayList(movesList ?: emptyList())))
         viewPager?.adapter = viewPagerAdapter
         if (tabLayout != null && viewPager != null) {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -96,7 +133,7 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.about,
+            R.string.base_stats,
             R.string.moves
         )
     }

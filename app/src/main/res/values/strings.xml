@@ -5,5 +5,12 @@
     <string name="name_or_number">Name or number</string>
     <string name="sub_title">Search for a Pokemon by name or using its National PokeCatch number.</string>
     <string name="about">About</string>
+    <string name="base_stats">Base Stats</string>
     <string name="moves">Moves</string>
+    <string name="hp">HP</string>
+    <string name="attack">ATK</string>
+    <string name="defense">DEF</string>
+    <string name="speed">SPD</string>
+    <string name="special_attack">SPATK</string>
+    <string name="special_defense">SPDEF</string>
 </resources>

@@ -81,10 +81,10 @@ class HomeAdapter @Inject constructor() :
                             tvPokemonName.setTextColor(
                                 palette.lightVibrantSwatch?.titleTextColor ?: 0
                             )
-                            imgPokeball.setColorFilter(
-                                palette.lightVibrantSwatch?.titleTextColor ?: 0,
-                                PorterDuff.Mode.MULTIPLY
-                            )
+//                            imgPokeball.setColorFilter(
+//                                palette.lightVibrantSwatch?.titleTextColor ?: 0,
+//                                PorterDuff.Mode.MULTIPLY
+//                            )
                         }
                     }
                 }

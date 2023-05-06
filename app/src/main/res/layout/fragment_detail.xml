@@ -52,6 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="450dp"
         android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/green"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true"
@@ -59,13 +60,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_pokemon"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:transitionName="img_pokemon"
-            tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/item_list_type" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_pokemon"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:transitionName="img_pokemon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_type"
+                tools:src="@tools:sample/avatars" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
