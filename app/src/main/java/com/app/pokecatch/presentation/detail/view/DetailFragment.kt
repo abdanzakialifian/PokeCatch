@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -24,6 +25,7 @@ import com.app.pokecatch.presentation.detail.adapter.ViewPagerAdapter
 import com.app.pokecatch.presentation.detail.viewmodel.DetailViewModel
 import com.app.pokecatch.presentation.move.view.MovesFragment
 import com.app.pokecatch.presentation.stats.view.StatsFragment
+import com.app.pokecatch.utils.setOnSingleClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -41,6 +43,7 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
     private val navArgs by navArgs<DetailFragmentArgs>()
     private var statsList: List<StatsItem>? = null
     private var movesList: List<MovesItem>? = null
+    private var isPokemonCaught = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +57,11 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
     override fun initView() {
         setViewPager()
         getPokemon()
+        setData()
+        setListener()
+    }
+
+    private fun setData() {
         binding?.apply {
             tvPokemonName.apply {
                 transitionName = navArgs.name
@@ -67,8 +75,30 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                 transitionName = navArgs.imageUrl
             }
         }
-        binding?.imgBack?.setOnClickListener {
-            findNavController().navigateUp()
+    }
+
+    private fun setListener() {
+        binding?.apply {
+            imgBack.setOnSingleClickListener {
+                findNavController().navigateUp()
+            }
+            btnCatchPokemon.setOnSingleClickListener {
+                if (isPokemonCaught) {
+                    Toast.makeText(requireContext(), "Pokemon Released.", Toast.LENGTH_SHORT).show()
+                    btnCatchPokemon.text = resources.getString(R.string.catch_pokemon)
+                    isPokemonCaught = false
+                } else {
+                    val randomNumber = (0..100).random()
+                    if (randomNumber >= 50) {
+                        Toast.makeText(requireContext(), "Pokemon Caught!", Toast.LENGTH_SHORT).show()
+                        btnCatchPokemon.text = resources.getString(R.string.pokemon_caught)
+                        isPokemonCaught = true
+                    } else {
+                        Toast.makeText(requireContext(), "Failed to Catch Pokemon! Please try again.", Toast.LENGTH_SHORT).show()
+                        btnCatchPokemon.text = resources.getString(R.string.catch_pokemon)
+                    }
+                }
+            }
         }
     }
 
