@@ -17,4 +17,8 @@
     <string name="pokemon_name">Pokemon Name</string>
     <string name="sub_title_bottom_sheet">It\'s time to give your favorite Pokemon a nickname!</string>
     <string name="done">Done</string>
+    <string name="pokemon_released">Pokemon Released.</string>
+    <string name="pokemon_cannot_released">Cannot Released Pokemon! Please try again.</string>
+    <string name="pokemon_caughtt">Pokemon Caught!</string>
+    <string name="pokemon_failed_catch">Failed to Catch Pokemon! Please try again.</string>
 </resources>

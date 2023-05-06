@@ -60,3 +60,15 @@ fun View.setOnSingleClickListener(onClick: () -> Unit) {
         onClick.invoke()
     }
 }
+
+fun Int.getPrimeNumber(): Boolean {
+    var isPrimeNumber = true
+    for (i in 2..this / 2) {
+        // condition for non prime number
+        if (this % i == 0) {
+            isPrimeNumber = false
+            break
+        }
+    }
+    return isPrimeNumber
+}

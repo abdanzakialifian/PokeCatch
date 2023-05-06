@@ -29,6 +29,7 @@ import com.app.pokecatch.presentation.detail.viewmodel.DetailViewModel
 import com.app.pokecatch.presentation.move.view.MovesFragment
 import com.app.pokecatch.presentation.stats.view.StatsFragment
 import com.app.pokecatch.utils.capitalizeWords
+import com.app.pokecatch.utils.getPrimeNumber
 import com.app.pokecatch.utils.setOnSingleClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -93,10 +94,12 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                     if (isPokemonCaught) {
                         // get prime number from random number from 1 until 100
                         val randomNumber = (1..100).random()
-                        val isPrimeNumber = getPrimeNumber(randomNumber)
+                        val isPrimeNumber = randomNumber.getPrimeNumber()
                         if (isPrimeNumber) {
                             Toast.makeText(
-                                requireContext(), "Pokemon Released.", Toast.LENGTH_SHORT
+                                requireContext(),
+                                resources.getString(R.string.pokemon_released),
+                                Toast.LENGTH_SHORT
                             ).show()
                             btnCatchPokemon.text = resources.getString(R.string.catch_pokemon)
                             isPokemonCaught = false
@@ -104,11 +107,10 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                         } else {
                             Toast.makeText(
                                 requireContext(),
-                                "Cannot Released Pokemon! Please try again.",
+                                resources.getString(R.string.pokemon_cannot_released),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-
                     } else {
                         // get random number from 0 until 1
                         val randomNumber = Math.random()
@@ -120,10 +122,9 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                                 override fun onButtonClicked(pokemonName: String) {
                                     Toast.makeText(
                                         requireContext(),
-                                        "Pokemon Caught!",
+                                        resources.getString(R.string.pokemon_caughtt),
                                         Toast.LENGTH_SHORT
-                                    )
-                                        .show()
+                                    ).show()
                                     btnCatchPokemon.text =
                                         resources.getString(R.string.pokemon_caught)
                                     isPokemonCaught = true
@@ -138,13 +139,12 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                             })
                             customBottomSheetDialog.isCancelable = false
                             customBottomSheetDialog.show(
-                                childFragmentManager,
-                                customBottomSheetDialog.tag
+                                childFragmentManager, customBottomSheetDialog.tag
                             )
                         } else {
                             Toast.makeText(
                                 requireContext(),
-                                "Failed to Catch Pokemon! Please try again.",
+                                resources.getString(R.string.pokemon_failed_catch),
                                 Toast.LENGTH_SHORT
                             ).show()
                             btnCatchPokemon.text = resources.getString(R.string.catch_pokemon)
@@ -215,18 +215,6 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                 }
             }
         }
-    }
-
-    private fun getPrimeNumber(randomNumber: Int): Boolean {
-        var isPrimeNumber = true
-        for (i in 2..randomNumber / 2) {
-            // condition for non prime number
-            if (randomNumber % i == 0) {
-                isPrimeNumber = false
-                break
-            }
-        }
-        return isPrimeNumber
     }
 
     private fun setViewPager() {
