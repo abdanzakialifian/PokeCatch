@@ -16,6 +16,7 @@ import com.app.pokecatch.presentation.home.adapter.HomeAdapter
 import com.app.pokecatch.presentation.home.adapter.LoadingStateAdapter
 import com.app.pokecatch.presentation.home.viewmodel.HomeViewModel
 import com.app.pokecatch.utils.gone
+import com.app.pokecatch.utils.setOnSingleClickListener
 import com.app.pokecatch.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -33,6 +34,13 @@ class HomeFragment : BaseVBFragment<FragmentHomeBinding>() {
     override fun initView() {
         getPokemonList()
         setSearchView()
+        setFabClickListener()
+    }
+
+    private fun setFabClickListener() {
+        binding?.floatingActionButton?.setOnSingleClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMyPokemonFragment())
+        }
     }
 
     private fun setSearchView() {

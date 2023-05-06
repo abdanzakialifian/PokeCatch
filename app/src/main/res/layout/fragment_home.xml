@@ -1,124 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingHorizontal="18dp"
     tools:context=".presentation.home.view.HomeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/app_name"
-        android:textColor="@color/black"
-        android:textSize="36sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/roboto_medium"
-        android:lineSpacingExtra="4dp"
-        android:text="@string/sub_title"
-        android:textColor="@color/dark_grey" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_search_view"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@null"
-        app:queryHint="@string/name_or_number" />
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_pokemon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        tools:listitem="@layout/item_list_pokemon" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="36sp" />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/sub_title"
+            android:textColor="@color/dark_grey" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_search_view"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="@string/name_or_number" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pokemon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_list_pokemon" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                    <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+    </LinearLayout>
 
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/pokeball"
+        android:tint="@color/white"
+        app:backgroundTint="@color/green"
+        app:borderWidth="0dp"
+        app:fabCustomSize="60dp"
+        app:maxImageSize="30dp"
+        app:useCompatPadding="true" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
-
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
-
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
-
-                <include layout="@layout/item_list_pokemon_shimmer_placeholder" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-</LinearLayout>
+</FrameLayout>

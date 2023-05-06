@@ -13,4 +13,5 @@
     <string name="speed">SPD</string>
     <string name="special_attack">SPATK</string>
     <string name="special_defense">SPDEF</string>
+    <string name="catch_pokemon">Catch Pokemon</string>
 </resources>

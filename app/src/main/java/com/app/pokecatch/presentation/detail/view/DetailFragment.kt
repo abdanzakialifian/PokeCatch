@@ -1,5 +1,6 @@
 package com.app.pokecatch.presentation.detail.view
 
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -17,12 +18,12 @@ import com.app.core.domain.model.StatsItem
 import com.app.core.utils.UiState
 import com.app.pokecatch.R
 import com.app.pokecatch.databinding.FragmentDetailBinding
-import com.app.pokecatch.presentation.stats.view.StatsFragment
 import com.app.pokecatch.presentation.base.BaseVBFragment
 import com.app.pokecatch.presentation.detail.adapter.TypeAdapter
 import com.app.pokecatch.presentation.detail.adapter.ViewPagerAdapter
 import com.app.pokecatch.presentation.detail.viewmodel.DetailViewModel
 import com.app.pokecatch.presentation.move.view.MovesFragment
+import com.app.pokecatch.presentation.stats.view.StatsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -86,6 +87,8 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                                 cvPokemon.setCardBackgroundColor(
                                     palette.lightVibrantSwatch?.rgb ?: 0
                                 )
+                                btnCatchPokemon.backgroundTintList =
+                                    ColorStateList.valueOf(palette.lightVibrantSwatch?.rgb ?: 0)
                             }
                         }
                     }
