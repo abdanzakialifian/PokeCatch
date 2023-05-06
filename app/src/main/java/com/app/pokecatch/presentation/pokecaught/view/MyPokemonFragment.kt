@@ -12,6 +12,7 @@ import com.app.pokecatch.databinding.FragmentMyPokemonBinding
 import com.app.pokecatch.presentation.base.BaseVBFragment
 import com.app.pokecatch.presentation.pokecaught.adapter.MyPokemonAdapter
 import com.app.pokecatch.presentation.pokecaught.viewmodel.MyPokemonViewModel
+import com.app.pokecatch.utils.extractName
 import com.app.pokecatch.utils.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -56,11 +57,11 @@ class MyPokemonFragment : BaseVBFragment<FragmentMyPokemonBinding>() {
             ) {
                 val extras = FragmentNavigatorExtras(
                     imageView to imageUrl,
-                    textView to name
+                    textView to name.extractName()
                 )
                 val navigateToDetailFragment =
                     MyPokemonFragmentDirections.actionMyPokemonFragmentToDetailFragment(
-                        name = name,
+                        name = name.extractName(),
                         imageUrl = imageUrl
                     )
                 findNavController().navigate(navigateToDetailFragment, extras)

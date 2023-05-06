@@ -9,6 +9,11 @@ import java.util.Locale
 
 fun String.extractId(): Int = this.substringAfter("pokemon").replace("/", "").toInt()
 
+fun String.extractName(): String {
+    val split = this.split(" ")
+    return split.last().replace("(", "").replace(")", "")
+}
+
 fun String.getImageUrl(): String {
     val id = this.extractId()
     return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"

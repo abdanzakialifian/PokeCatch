@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class MyPokemonViewModel @Inject constructor(private val pokemonUseCase: PokemonUseCase) : ViewModel() {
+class MyPokemonViewModel @Inject constructor(pokemonUseCase: PokemonUseCase) : ViewModel() {
     val getAllPokemon: Flow<List<Pokemon>> = pokemonUseCase.getAllPokemon().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),

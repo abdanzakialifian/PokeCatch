@@ -22,11 +22,13 @@ import com.app.core.utils.UiState
 import com.app.pokecatch.R
 import com.app.pokecatch.databinding.FragmentDetailBinding
 import com.app.pokecatch.presentation.base.BaseVBFragment
+import com.app.pokecatch.presentation.bottomsheet.CustomBottomSheetDialog
 import com.app.pokecatch.presentation.detail.adapter.TypeAdapter
 import com.app.pokecatch.presentation.detail.adapter.ViewPagerAdapter
 import com.app.pokecatch.presentation.detail.viewmodel.DetailViewModel
 import com.app.pokecatch.presentation.move.view.MovesFragment
 import com.app.pokecatch.presentation.stats.view.StatsFragment
+import com.app.pokecatch.utils.capitalizeWords
 import com.app.pokecatch.utils.setOnSingleClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -71,7 +73,7 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
         binding?.apply {
             tvPokemonName.apply {
                 transitionName = navArgs.name
-                text = navArgs.name
+                text = navArgs.name?.capitalizeWords()
             }
             imgPokemon.apply {
                 Glide.with(requireContext()).load(navArgs.imageUrl).into(this)
@@ -112,17 +114,33 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                         val randomNumber = Math.random()
                         // 50% chance of being here
                         if (randomNumber < 0.5) {
-                            Toast.makeText(requireContext(), "Pokemon Caught!", Toast.LENGTH_SHORT)
-                                .show()
-                            btnCatchPokemon.text = resources.getString(R.string.pokemon_caught)
-                            isPokemonCaught = true
-                            val pokemon = Pokemon(
-                                pokemonId = detailPokemon?.id,
-                                pokemonName = navArgs.name,
-                                pokemonImage = navArgs.imageUrl,
-                                pokemonType = Gson().toJson(detailPokemon?.types)
+                            val customBottomSheetDialog = CustomBottomSheetDialog()
+                            customBottomSheetDialog.setOnButtonClickCallback(object :
+                                CustomBottomSheetDialog.OnButtonClickCallback {
+                                override fun onButtonClicked(pokemonName: String) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Pokemon Caught!",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                    btnCatchPokemon.text =
+                                        resources.getString(R.string.pokemon_caught)
+                                    isPokemonCaught = true
+                                    val pokemon = Pokemon(
+                                        pokemonId = detailPokemon?.id,
+                                        pokemonName = pokemonName.capitalizeWords() + " " + "(${navArgs.name?.capitalizeWords()})",
+                                        pokemonImage = navArgs.imageUrl,
+                                        pokemonType = Gson().toJson(detailPokemon?.types)
+                                    )
+                                    viewModel.insertPokemon(pokemon)
+                                }
+                            })
+                            customBottomSheetDialog.isCancelable = false
+                            customBottomSheetDialog.show(
+                                childFragmentManager,
+                                customBottomSheetDialog.tag
                             )
-                            viewModel.insertPokemon(pokemon)
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -162,7 +180,7 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
 
     private fun getPokemon() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.setName(navArgs.name ?: "")
+            viewModel.setName(navArgs.name?.lowercase() ?: "")
             viewModel.getPokemon.flowWithLifecycle(
                 viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED
             ).collect { uiState ->

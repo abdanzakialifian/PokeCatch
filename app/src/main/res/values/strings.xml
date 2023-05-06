@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">PokeCatch</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="retry">Retry</string>
     <string name="name_or_number">Name or number</string>
     <string name="sub_title">Search for a Pokemon by name or using its National PokeCatch number.</string>
-    <string name="about">About</string>
     <string name="base_stats">Base Stats</string>
     <string name="moves">Moves</string>
     <string name="hp">HP</string>
@@ -16,4 +14,7 @@
     <string name="catch_pokemon">Catch Pokemon</string>
     <string name="pokemon_caught">Pokemon Caught</string>
     <string name="my_pokemon">My Pokemon</string>
+    <string name="pokemon_name">Pokemon Name</string>
+    <string name="sub_title_bottom_sheet">It\'s time to give your favorite Pokemon a nickname!</string>
+    <string name="done">Done</string>
 </resources>

@@ -2,7 +2,6 @@ package com.app.pokecatch.presentation.home.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.core.domain.model.PokemonResultsItem
 import com.app.pokecatch.databinding.ItemListPokemonBinding
+import com.app.pokecatch.utils.capitalizeWords
 import com.app.pokecatch.utils.getImageUrl
 import com.app.pokecatch.utils.setOnSingleClickListener
 import com.bumptech.glide.Glide
@@ -41,7 +41,7 @@ class HomeAdapter @Inject constructor() :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PokemonResultsItem) {
             binding.apply {
-                tvPokemonName.text = item.name
+                tvPokemonName.text = item.name?.capitalizeWords()
                 imgPokemon.transitionName = item.url?.getImageUrl()
                 tvPokemonName.transitionName = item.name
                 setImagePokemon(
