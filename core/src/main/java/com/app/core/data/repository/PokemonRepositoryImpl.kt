@@ -55,4 +55,9 @@ class PokemonRepositoryImpl @Inject constructor(
                 it.mapToPokemon()
             }
         }
+
+    override fun updatePokemonName(pokemonId: Int, pokemonName: String, totalUpdate: Int): Int =
+        localDataSource.updatePokemonName(pokemonId, pokemonName, totalUpdate)
+
+    override fun getTotalUpdate(pokemonId: Int): Int = localDataSource.getTotalUpdate(pokemonId)
 }

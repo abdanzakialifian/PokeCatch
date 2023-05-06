@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.transition.TransitionInflater
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -116,31 +117,7 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                         val randomNumber = Math.random()
                         // 50% chance of being here
                         if (randomNumber < 0.5) {
-                            val customBottomSheetDialog = CustomBottomSheetDialog()
-                            customBottomSheetDialog.setOnButtonClickCallback(object :
-                                CustomBottomSheetDialog.OnButtonClickCallback {
-                                override fun onButtonClicked(pokemonName: String) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        resources.getString(R.string.pokemon_caughtt),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    btnCatchPokemon.text =
-                                        resources.getString(R.string.pokemon_caught)
-                                    isPokemonCaught = true
-                                    val pokemon = Pokemon(
-                                        pokemonId = detailPokemon?.id,
-                                        pokemonName = pokemonName.capitalizeWords() + " " + "(${navArgs.name?.capitalizeWords()})",
-                                        pokemonImage = navArgs.imageUrl,
-                                        pokemonType = Gson().toJson(detailPokemon?.types)
-                                    )
-                                    viewModel.insertPokemon(pokemon)
-                                }
-                            })
-                            customBottomSheetDialog.isCancelable = false
-                            customBottomSheetDialog.show(
-                                childFragmentManager, customBottomSheetDialog.tag
-                            )
+                            customBottomSheetDialog(binding?.btnCatchPokemon)
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -200,6 +177,35 @@ class DetailFragment : BaseVBFragment<FragmentDetailBinding>() {
                 }
             }
         }
+    }
+
+    private fun customBottomSheetDialog(buttonCatch: AppCompatButton?) {
+        val customBottomSheetDialog = CustomBottomSheetDialog()
+        customBottomSheetDialog.setOnButtonClickCallback(object :
+            CustomBottomSheetDialog.OnButtonClickCallback {
+            override fun onButtonClicked(pokemonName: String) {
+                Toast.makeText(
+                    requireContext(),
+                    resources.getString(R.string.pokemon_caughtt),
+                    Toast.LENGTH_SHORT
+                ).show()
+                buttonCatch?.text =
+                    resources.getString(R.string.pokemon_caught)
+                isPokemonCaught = true
+                val pokemon = Pokemon(
+                    pokemonId = detailPokemon?.id,
+                    pokemonName = pokemonName.capitalizeWords() + " " + "(${navArgs.name?.capitalizeWords()})",
+                    pokemonImage = navArgs.imageUrl,
+                    pokemonType = Gson().toJson(detailPokemon?.types),
+                    totalUpdate = 0
+                )
+                viewModel.insertPokemon(pokemon)
+            }
+        })
+        customBottomSheetDialog.isCancelable = false
+        customBottomSheetDialog.show(
+            childFragmentManager, customBottomSheetDialog.tag
+        )
     }
 
     private fun checkPokemon() {

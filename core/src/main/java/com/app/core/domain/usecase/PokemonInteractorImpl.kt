@@ -31,4 +31,8 @@ class PokemonInteractorImpl @Inject constructor(private val pokemonRepository: P
     }
 
     override fun getAllPokemon(): Flow<List<Pokemon>> = pokemonRepository.getAllPokemon()
+    override fun updatePokemonName(pokemonId: Int, pokemonName: String, totalUpdate: Int): Int =
+        pokemonRepository.updatePokemonName(pokemonId, pokemonName, totalUpdate)
+
+    override fun getTotalUpdate(pokemonId: Int): Int = pokemonRepository.getTotalUpdate(pokemonId)
 }

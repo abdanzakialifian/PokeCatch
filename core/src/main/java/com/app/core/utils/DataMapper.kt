@@ -301,6 +301,7 @@ fun PokemonEntity.mapToPokemon(): Pokemon = Pokemon(
     pokemonId = this.pokemonId,
     pokemonName = this.pokemonName,
     pokemonImage = this.pokemonImage,
-    pokemonType = this.pokemonType
+    pokemonType = this.pokemonType,
+    totalUpdate = this.totalUpdate
 )
 

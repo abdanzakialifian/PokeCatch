@@ -17,5 +17,8 @@ data class PokemonEntity(
     val pokemonImage: String? = null,
 
     @ColumnInfo("pokemon_type")
-    val pokemonType: String? = null
+    val pokemonType: String? = null,
+
+    @ColumnInfo("total_update")
+    val totalUpdate: Int? = null
 )

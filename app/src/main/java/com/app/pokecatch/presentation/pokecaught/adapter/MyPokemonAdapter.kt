@@ -41,15 +41,23 @@ class MyPokemonAdapter @Inject constructor() :
         fun bind(item: Pokemon) {
             binding.apply {
                 val adapter = TypeAdapter()
+                // convert string json array to list
                 val listTypes =
                     Gson().fromJson(item.pokemonType, Array<TypesItem>::class.java).toList()
                 adapter.submitList(listTypes)
                 rvType.adapter = adapter
+
                 tvPokemonName.text = item.pokemonName
                 imgPokemon.transitionName = item.pokemonImage
                 tvPokemonName.transitionName = item.pokemonName
+
                 setImagePokemon(
-                    itemView.context, itemView, binding.imgPokemon, binding.tvPokemonName, item
+                    itemView.context,
+                    itemView,
+                    binding.imgPokemon,
+                    binding.tvPokemonName,
+                    binding.imgEdit,
+                    item
                 )
                 setBackgroundCardView(itemView.context, this, item.pokemonImage ?: "")
             }
@@ -95,8 +103,9 @@ class MyPokemonAdapter @Inject constructor() :
     private fun setImagePokemon(
         context: Context,
         itemView: View,
-        pokemonImage: AppCompatImageView,
-        pokemonName: TextView,
+        imagePokemon: AppCompatImageView,
+        textViewPokemon: TextView,
+        imageEdit: AppCompatImageView,
         item: Pokemon
     ) {
         Glide.with(context).load(item.pokemonImage).listener(object : RequestListener<Drawable?> {
@@ -119,19 +128,25 @@ class MyPokemonAdapter @Inject constructor() :
                     onItemClickCallback.onItemClicked(
                         item.pokemonName ?: "",
                         item.pokemonImage ?: "",
-                        pokemonImage,
-                        pokemonName
-                    )
+                        imagePokemon,
+                        textViewPokemon,
+
+                        )
+                }
+                imageEdit.setOnSingleClickListener {
+                    onItemClickCallback.onEditClicked(item.pokemonId ?: 0, item.pokemonName ?: "")
                 }
                 return false
             }
-        }).into(pokemonImage)
+        }).into(imagePokemon)
     }
 
     interface OnItemClickCallback {
         fun onItemClicked(
             name: String, imageUrl: String, imageView: AppCompatImageView, textView: TextView
         )
+
+        fun onEditClicked(id: Int, name: String)
     }
 
     companion object {

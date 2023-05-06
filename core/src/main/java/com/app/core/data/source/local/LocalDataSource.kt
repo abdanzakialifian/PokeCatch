@@ -18,4 +18,9 @@ class LocalDataSource @Inject constructor(private val pokemonDao: PokemonDao) {
     }
 
     fun getAllPokemon(): Flow<List<PokemonEntity>> = pokemonDao.getAllPokemon()
+
+    fun updatePokemonName(pokemonId: Int, pokemonName: String, totalUpdate: Int): Int =
+        pokemonDao.updatePokemonName(pokemonId, pokemonName, totalUpdate)
+
+    fun getTotalUpdate(pokemonId: Int): Int = pokemonDao.getTotalUpdate(pokemonId)
 }

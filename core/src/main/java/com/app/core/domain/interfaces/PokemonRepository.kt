@@ -14,4 +14,6 @@ interface PokemonRepository {
     fun checkPokemon(pokemonId: Int): Boolean
     fun deletePokemon(pokemonId: Int)
     fun getAllPokemon(): Flow<List<Pokemon>>
+    fun updatePokemonName(pokemonId: Int, pokemonName: String, totalUpdate: Int): Int
+    fun getTotalUpdate(pokemonId: Int): Int
 }

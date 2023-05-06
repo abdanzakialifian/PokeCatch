@@ -25,4 +25,9 @@ class MyPokemonViewModel @Inject constructor(private val pokemonUseCase: Pokemon
             pokemonUseCase.deletePokemon(pokemonId)
         }
     }
+
+    fun updatePokemonName(pokemonId: Int, pokemonName: String, totalUpdate: Int): Int =
+        pokemonUseCase.updatePokemonName(pokemonId, pokemonName, totalUpdate)
+
+    fun getTotalUpdate(pokemonId: Int): Int = pokemonUseCase.getTotalUpdate(pokemonId)
 }

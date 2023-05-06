@@ -20,4 +20,10 @@ interface PokemonDao {
 
     @Query("SELECT * FROM pokemon_entity")
     fun getAllPokemon(): Flow<List<PokemonEntity>>
+
+    @Query("UPDATE pokemon_entity SET pokemon_name=:pokemonName, total_update=:totalUpdate WHERE pokemon_id=:pokemonId")
+    fun updatePokemonName(pokemonId: Int, pokemonName: String, totalUpdate: Int): Int
+
+    @Query("SELECT total_update FROM pokemon_entity WHERE pokemon_id=:pokemonId")
+    fun getTotalUpdate(pokemonId: Int): Int
 }

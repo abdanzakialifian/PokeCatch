@@ -15,12 +15,17 @@ import com.app.core.domain.model.Pokemon
 import com.app.pokecatch.R
 import com.app.pokecatch.databinding.FragmentMyPokemonBinding
 import com.app.pokecatch.presentation.base.BaseVBFragment
+import com.app.pokecatch.presentation.bottomsheet.CustomBottomSheetDialog
 import com.app.pokecatch.presentation.pokecaught.adapter.MyPokemonAdapter
 import com.app.pokecatch.presentation.pokecaught.viewmodel.MyPokemonViewModel
+import com.app.pokecatch.utils.deleteLastName
 import com.app.pokecatch.utils.extractName
+import com.app.pokecatch.utils.getLastName
 import com.app.pokecatch.utils.getPrimeNumber
 import com.app.pokecatch.utils.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -107,6 +112,42 @@ class MyPokemonFragment : BaseVBFragment<FragmentMyPokemonBinding>() {
                     )
                 findNavController().navigate(navigateToDetailFragment, extras)
             }
+
+            override fun onEditClicked(id: Int, name: String) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val totalUpdate = viewModel.getTotalUpdate(id)
+                    customBottomSheetDialog(id, name, totalUpdate)
+                }
+            }
         })
+    }
+
+    private fun customBottomSheetDialog(pokemonId: Int, pokemonNames: String, totalUpdate: Int) {
+        val modifyName = if (totalUpdate == 0) {
+            pokemonNames.deleteLastName()
+        } else {
+            pokemonNames.deleteLastName().deleteLastName()
+        }
+        val customBottomSheetDialog = CustomBottomSheetDialog.newInstance(modifyName)
+        customBottomSheetDialog.setOnButtonClickCallback(object :
+            CustomBottomSheetDialog.OnButtonClickCallback {
+            override fun onButtonClicked(pokemonName: String) {
+                val lastName = pokemonNames.getLastName()
+                CoroutineScope(Dispatchers.IO).launch {
+                    val isUpdated = viewModel.updatePokemonName(
+                        pokemonId,
+                        StringBuilder().append(pokemonName).append(" ").append("-$totalUpdate")
+                            .append(" ")
+                            .append(lastName).toString(),
+                        totalUpdate = totalUpdate + 1
+                    )
+                    if (isUpdated == 1) {
+                        getPokemonCaught()
+                    }
+                }
+            }
+        })
+        customBottomSheetDialog.isCancelable = false
+        customBottomSheetDialog.show(childFragmentManager, customBottomSheetDialog.tag)
     }
 }

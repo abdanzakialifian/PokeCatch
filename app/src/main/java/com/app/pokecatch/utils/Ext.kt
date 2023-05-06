@@ -14,6 +14,22 @@ fun String.extractName(): String {
     return split.last().replace("(", "").replace(")", "")
 }
 
+fun String.deleteLastName(): String {
+    val split = this.split(" ")
+    val stringBuilder = StringBuilder()
+    split.forEachIndexed { index, name ->
+        if (index != split.lastIndex) {
+            if(index == split.lastIndex - 1) stringBuilder.append(name) else stringBuilder.append(name).append(" ")
+        }
+    }
+    return stringBuilder.toString()
+}
+
+fun String.getLastName(): String {
+    val split = this.split(" ")
+    return split.last()
+}
+
 fun String.getImageUrl(): String {
     val id = this.extractId()
     return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"

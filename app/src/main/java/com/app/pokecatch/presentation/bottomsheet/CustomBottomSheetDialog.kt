@@ -28,11 +28,17 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
 
         binding?.apply {
             btnCatchPokemon.setOnSingleClickListener {
-                onButtonClickCallback.onButtonClicked(binding?.edtName?.text.toString())
-                this@CustomBottomSheetDialog.dismiss()
+                if (edtName.text?.isNotEmpty() == true) {
+                    onButtonClickCallback.onButtonClicked(binding?.edtName?.text.toString())
+                    this@CustomBottomSheetDialog.dismiss()
+                }
             }
             imgClose.setOnSingleClickListener {
                 this@CustomBottomSheetDialog.dismiss()
+            }
+            if (arguments != null) {
+                val pokemonName = arguments?.getString(POKEMON_NAME)
+                edtName.setText(pokemonName)
             }
         }
     }
@@ -48,5 +54,17 @@ class CustomBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val POKEMON_NAME = "POKEMON NAME"
+        fun newInstance(pokemonName: String): CustomBottomSheetDialog {
+            val fragment = CustomBottomSheetDialog()
+            Bundle().apply {
+                putString(POKEMON_NAME, pokemonName)
+                fragment.arguments = this
+            }
+            return fragment
+        }
     }
 }
